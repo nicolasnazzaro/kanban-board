@@ -1,14 +1,20 @@
 import React from 'react';
-import { Card, Typography } from '@material-ui/core';
+import { Card, Typography, CardContent } from '@material-ui/core';
 
-const CardItem = () => {
+const CardItem = ({text}) => {
     return (
-        <Card>
-            <Typography gutterBottom>
-              Word of the Day
-            </Typography>
+        <Card style={styles.cardContainer}>
+          <CardContent>
+            <Typography gutterBottom>{text}</Typography>
+          </CardContent>
         </Card>
       );
+}
+
+const styles = {
+  cardContainer: {
+    marginBottom: 8
+  }
 }
 
 export default CardItem;
