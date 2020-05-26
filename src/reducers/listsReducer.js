@@ -1,3 +1,5 @@
+import { addList } from '../actions/listActions'
+
 const initialState = [
     {
         title: "List 1",
@@ -33,7 +35,7 @@ const initialState = [
     },
     {
         title: "List 3",
-        id: 0,
+        id: 2,
         cards: [
             {
                 id: 2,
@@ -49,6 +51,13 @@ const initialState = [
 
 const listsReducer = (state = initialState, action) => {
     switch(action.type) {
+        case "ADD_LIST":
+            const newList ={
+                id: 3,
+                title: action.payload,
+                cards: []
+            }
+            return [...state, newList]
         default: 
             return state;
     }
