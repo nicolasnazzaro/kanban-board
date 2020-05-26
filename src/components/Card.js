@@ -8,7 +8,7 @@ const CardItem = ({text}) => {
             <Typography gutterBottom>{text}</Typography>
           </CardContent>
         </Card>
-      );
+    );
 }
 
 const styles = {
