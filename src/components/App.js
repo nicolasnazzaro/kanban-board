@@ -2,19 +2,26 @@ import React from 'react';
 import List from './List';
 import { connect } from "react-redux";
 import AddElementButton from './AddElementButton';
+import { DragDropContext } from 'react-beautiful-dnd';
 
 const App = ({lists}) => {
   
+  const onDragEnd = () => {
+    //reordering logic
+  }
+
   return (
-    <div>
-      Hello react!
-      <div style={styles.listContainer}>
-        {lists.map(list => <List key={list.id} title={list.title} cards={list.cards}/>)}
-        <div style={styles.addContainer}>
-          <AddElementButton element='list'/>
+    <DragDropContext onDragEnd={onDragEnd}>
+      <div>
+        Hello react!
+        <div style={styles.listContainer}>
+          {lists.map(list => <List key={list.id} listId={list.id} title={list.title} cards={list.cards}/>)}
+          <div style={styles.addContainer}>
+            <AddElementButton element='list'/>
+          </div>
         </div>
       </div>
-    </div>
+    </DragDropContext>
   );
 }
 

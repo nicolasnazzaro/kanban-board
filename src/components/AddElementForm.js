@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useRef } from 'react';
 import Icon from '@material-ui/core/Icon';
 import { Card, Button } from '@material-ui/core';
 import TextareaAutosize from 'react-textarea-autosize';
@@ -6,23 +6,29 @@ import { connect } from 'react-redux';
 import { addList } from '../actions/listActions';
 import { addCard } from '../actions/cardsActions';
 
-const AddElementForm = ({element, onBlur, dispatch}) => {
+const AddElementForm = ({element, onBlur, dispatch, listId}) => {
     
     const buttonTitle = element === 'list' ? 'Add List' : 'Add Card';
-    const placeholder = element === 'list' ? 'Enter list title' : 'Enter a title for this card';
-    const addElement = element === 'list' ? addList : addCard;
+    const placeholder = element === 'list' ? 'Enter list title...' : 'Enter a title for this card...';
 
     const [elementText, setElementText] = useState('');
+    const textareaRef = useRef(null);
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(addElement(elementText));
+        console.log(e.currentTarget.name)
+        if (element === 'list') {
+            dispatch(addList(elementText));
+        } else if (element === 'card') {
+            dispatch(addCard(elementText, listId));
+        }
         setElementText('');
+        textareaRef.current.blur();
     }
 
     return (
         <Fragment>
-            <Card name='form' onBlur={onBlur} style={{
+            <Card onBlur={onBlur} style={{
                 overflow: 'visible',
                 minHeight: element === 'card' ? 80 : 'none',
                 minWidth: 266,
@@ -31,6 +37,7 @@ const AddElementForm = ({element, onBlur, dispatch}) => {
             <TextareaAutosize
                 placeholder={placeholder}
                 autoFocus
+                ref={textareaRef}
                 value={elementText}
                 onChange={e => setElementText(e.target.value)}
                 style={{
@@ -40,15 +47,16 @@ const AddElementForm = ({element, onBlur, dispatch}) => {
                     outline: 'none',
                     border: 'none',
                     fontSize: 15,
-                    fontWeight: element === 'list' && 700
+                    fontWeight: element === 'list' && 600
                 }}
             />
             </Card>
             <div style={{marginTop: 8, display: 'flex', alignItems: 'center'}}>
                 <Button
-                    onMouseDown={e => {handleSubmit(e)}}
                     variant='contained'
-                    style={{color: 'white', backgroundColor: '#5aac44'}}
+                    disabled={!!!elementText}
+                    onMouseDown={e => handleSubmit(e)}
+                    color='primary'
                 >
                     {buttonTitle}
                 </Button>

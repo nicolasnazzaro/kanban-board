@@ -1,4 +1,4 @@
-export const addCard = (title) => ({
+export const addCard = (text, listId) => ({
     type: "ADD_CARD",
-    payload: title
+    payload: {text, listId}
 });

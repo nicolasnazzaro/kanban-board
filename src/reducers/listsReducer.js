@@ -1,63 +1,57 @@
-import { addList } from '../actions/listActions'
+import { v4 as uuid } from 'uuid';
 
 const initialState = [
     {
-        title: "List 1",
-        id: 0,
+        title: "To do",
+        id: uuid(),
         cards: [
             {
-                id: 0,
-                text: "text card 1"
+                id: uuid(),
+                text: "Do the laundry"
             },
             {
-                id: 1,
-                text: "text card 2"
+                id: uuid(),
+                text: "Code react applications"
             },
         ]
     },
     {
-        title: "List 2",
-        id: 1,
-        cards: [
-            {
-                id: 0,
-                text: "text card 1"
-            },
-            {
-                id: 1,
-                text: "text card 2"
-            },
-            {
-                id: 2,
-                text: "text card 3"
-            }
-        ]
+        title: "In progress",
+        id: uuid(),
+        cards: []
     },
     {
-        title: "List 3",
-        id: 2,
-        cards: [
-            {
-                id: 2,
-                text: "text card 1"
-            },
-            {
-                id: 1,
-                text: "text card 2"
-            },
-        ]
+        title: "Done",
+        id: uuid(),
+        cards: []
     }
 ]
 
 const listsReducer = (state = initialState, action) => {
     switch(action.type) {
-        case "ADD_LIST":
-            const newList ={
-                id: 3,
+        case 'ADD_LIST':
+            const newList = {
+                id: uuid(),
                 title: action.payload,
                 cards: []
             }
-            return [...state, newList]
+            return [...state, newList];
+        case 'ADD_CARD':
+            const newCard = {
+                id: uuid(),
+                text: action.payload.text
+            }
+            const newState = state.map(list => {
+                if (list.id === action.payload.listId) {
+                    return {
+                        ...list,
+                        cards: [...list.cards, newCard]
+                    }
+                } else {
+                    return list;
+                }
+            });
+            return newState;
         default: 
             return state;
     }

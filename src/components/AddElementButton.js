@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Icon from '@material-ui/core/Icon';
 import AddElementForm from './AddElementForm';
 
-const AddElementButton = ({element}) => {
+const AddElementButton = ({element, listId}) => {
 
     const [formOpen, setFormOpen] = useState(false);
 
@@ -13,7 +13,7 @@ const AddElementButton = ({element}) => {
         </div>
     );
     
-    return formOpen ? <AddElementForm element={element} onBlur={() => {setFormOpen(false)}}/> : renderButton();
+    return formOpen ? <AddElementForm listId={listId} element={element} onBlur={() => {setFormOpen(false)}}/> : renderButton();
 }
 
 const addButtonStyles = {

@@ -1,14 +1,20 @@
-import React from 'react'
-import CardItem from './Card'
-import AddElementButton from './AddElementButton'
+import React from 'react';
+import CardItem from './CardItem';
+import AddElementButton from './AddElementButton';
+import { Droppable } from 'react-beautiful-dnd';
 
-const List = ({title, cards}) => {
+const List = ({title, cards, listId}) => {
     return (
-        <div style={styles.container}>
-            <h4>{title}</h4>
-            {cards.map(card => (<CardItem key={card.id} text={card.text}/>) )}
-            <AddElementButton element='card'/>
-        </div>
+        <Droppable droppableId={listId}>
+            {(provided) => (
+                <div {...provided.droppableProps} ref={provided.innerRef} style={styles.container}>
+                <h4>{title}</h4>
+                {cards.map((card, index) => (<CardItem key={card.id} text={card.text} cardId={card.id} index={index}/>) )}
+                <AddElementButton listId={listId} element='card'/>
+                {provided.placeholder}
+            </div>
+            )}
+        </Droppable>
     );
 }
 
