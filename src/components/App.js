@@ -1,7 +1,7 @@
 import React from 'react';
 import List from './List';
 import { connect } from "react-redux";
-import AddElementButton from './AddElementButton';
+import AddElementButton from './common/AddElementButton';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { sortCard } from '../actions/cardsActions';
 import { sortList } from '../actions/listActions';
@@ -15,11 +15,6 @@ const App = ({board, dispatch}) => {
   
   const onDragEnd = (result) => {
     const {destination, source, draggableId, type} = result;
-
-    console.log(
-      'drag: ' + source.draggableId +
-      'drop: ' + source.droppableId + ' ' + destination.droppableId
-    )
     
     if (!destination) {
       return;
@@ -58,10 +53,8 @@ const App = ({board, dispatch}) => {
                   index={index}
                 />
               )}
-              <div style={styles.addContainer}>
-               <AddElementButton element='list'/>
-              </div>
               {provided.placeholder}
+               <AddElementButton element='list'/>
             </AllListContainer>
           )}
         </Droppable>
@@ -72,16 +65,5 @@ const App = ({board, dispatch}) => {
 const mapStateToProps = state => ({
   board: state.board
 })
-
-const styles = {
-  addContainer: {
-    backgroundColor: "#dfe3e6",
-    borderRadius: 4,
-    width: 280,
-    height: '100%',
-    padding: 10,
-    marginRight: 8,
-  }
-}
 
 export default connect(mapStateToProps)(App);

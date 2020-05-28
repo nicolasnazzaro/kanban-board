@@ -4,17 +4,21 @@ const initialState = [
     {
         title: "To do",
         id: uuid(),
-        cards: [
-            {
-                id: uuid(),
-                text: "Code react applications"
-            }
-        ]
+        cards: []
     },
     {
         title: "In progress",
         id: uuid(),
-        cards: []
+        cards: [
+            {
+            id: uuid(),
+            text: "Code react applications"
+            },
+            {
+                id: uuid(),
+                text: "Debug react applications"
+            }
+        ]
     },
     {
         title: "Done",
@@ -25,7 +29,7 @@ const initialState = [
 
 const boardReducer = (state = initialState, action) => {
     switch(action.type) {
-        case 'ADD_LIST': {
+        case 'LIST_ADD': {
             const newList = {
                 id: uuid(),
                 title: action.payload,
@@ -33,7 +37,7 @@ const boardReducer = (state = initialState, action) => {
             }
             return [...state, newList];
         }
-        case 'ADD_CARD': {
+        case 'CARD_ADD': {
             const newCard = {
                 id: uuid(),
                 text: action.payload.text
@@ -84,6 +88,30 @@ const boardReducer = (state = initialState, action) => {
                 endList.cards.splice(droppableIndexEnd, 0, ...card);
             }
             return newState;
+        }
+        case 'CARD_DELETE': {
+            const newState = state.map(list => {
+                if (list.id === action.payload.listId) {
+                    return {
+                        ...list,
+                        cards: [...list.cards.filter(card => card.id !== action.payload.cardId)]
+                    }
+                } else {
+                    return list;
+                }
+            });
+            return newState;
+        }
+        case 'LIST_DELETE': {
+            return [...state.filter(list => list.id !== action.payload.listId)];
+        }
+        case 'LIST_EDIT': {
+            const list = state.find(list => list.id === action.payload.listId);
+            console.log(list);
+            list.title = action.payload.listTitle
+            console.log(list.title);
+  
+            return [...state];
         }
         default: 
             return state;

@@ -17,3 +17,11 @@ export const sortCard = (
         droppableIndexStart
     }
 });
+
+export const deleteCard = (listId, cardId) => ({
+    type: 'CARD_DELETE',
+    payload: {
+        listId,
+        cardId
+    }
+})

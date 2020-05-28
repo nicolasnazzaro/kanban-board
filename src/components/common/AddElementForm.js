@@ -3,8 +3,8 @@ import Icon from '@material-ui/core/Icon';
 import { Card, Button } from '@material-ui/core';
 import TextareaAutosize from 'react-textarea-autosize';
 import { connect } from 'react-redux';
-import { addList } from '../actions/listActions';
-import { addCard } from '../actions/cardsActions';
+import { addList } from '../../actions/listActions';
+import { addCard } from '../../actions/cardsActions';
 
 const AddElementForm = ({element, onBlur, dispatch, listId}) => {
     

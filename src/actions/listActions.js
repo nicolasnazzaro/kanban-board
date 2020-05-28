@@ -1,5 +1,5 @@
 export const addList = (title) => ({
-    type: "ADD_LIST",
+    type: "LIST_ADD",
     payload: title
 });
 
@@ -17,3 +17,13 @@ export const sortList = (
         droppableIndexStart
     }
 });
+
+export const deleteList = (listId) => ({
+    type: 'LIST_DELETE',
+    payload: { listId }
+});
+
+export const editList = (listId, listTitle) => ({
+    type: 'LIST_EDIT',
+    payload: { listId, listTitle }
+})
