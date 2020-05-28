@@ -1,13 +1,13 @@
 import { createStore, combineReducers } from 'redux';
-import listsReducer from '../reducers/listsReducer';
-import cardsReducer from '../reducers/cardsReducer';
+import boardReducer from '../reducers/boardReducer';
 
 export default () => {
+    
     const store = createStore(
         combineReducers({
-            lists: listsReducer,
-            cards: cardsReducer
+            board: boardReducer,
         }), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
     );
+
     return store;
 }

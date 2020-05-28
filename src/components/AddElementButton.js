@@ -23,7 +23,8 @@ const addButtonStyles = {
     borderRadius: 3,
     height: 36,
     width: 266,
-    paddingLeft: 10
+    paddingLeft: 10,
+    paddingTop: 4
 }
 
 export default AddElementButton;

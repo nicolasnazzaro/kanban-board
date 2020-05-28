@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import Icon from '@material-ui/core/Icon';
 import { Card, Button } from '@material-ui/core';
 import TextareaAutosize from 'react-textarea-autosize';
@@ -27,7 +27,7 @@ const AddElementForm = ({element, onBlur, dispatch, listId}) => {
     }
 
     return (
-        <Fragment>
+        <div style={{paddingTop: 4}}>
             <Card onBlur={onBlur} style={{
                 overflow: 'visible',
                 minHeight: element === 'card' ? 80 : 'none',
@@ -47,7 +47,7 @@ const AddElementForm = ({element, onBlur, dispatch, listId}) => {
                     outline: 'none',
                     border: 'none',
                     fontSize: 15,
-                    fontWeight: element === 'list' && 600
+                    fontWeight: element === 'list' && 600,
                 }}
             />
             </Card>
@@ -60,9 +60,9 @@ const AddElementForm = ({element, onBlur, dispatch, listId}) => {
                 >
                     {buttonTitle}
                 </Button>
-                <Icon style={{cursor: 'pointer', marginLeft: 8}}>close</Icon>
+                <Icon style={{cursor: 'pointer', marginLeft: 8}} onClick={() => {textareaRef.current.blur()}}>close</Icon>
             </div>
-        </Fragment>
+        </div>
     );
 }
 

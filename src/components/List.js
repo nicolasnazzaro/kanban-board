@@ -1,32 +1,47 @@
 import React from 'react';
 import CardItem from './CardItem';
 import AddElementButton from './AddElementButton';
-import { Droppable } from 'react-beautiful-dnd';
+import { Droppable, Draggable } from 'react-beautiful-dnd';
+import styled from 'styled-components';
 
-const List = ({title, cards, listId}) => {
+
+const ListContainer = styled.div`
+    background-color: #dfe3e6;
+    border-radius: 4px;
+    width: 280px;
+    height: 100%;
+    padding: 10px;
+    margin-right: 8px
+`
+
+const List = ({title, cards, listId, index}) => {
     return (
-        <Droppable droppableId={listId}>
-            {(provided) => (
-                <div {...provided.droppableProps} ref={provided.innerRef} style={styles.container}>
-                <h4>{title}</h4>
-                {cards.map((card, index) => (<CardItem key={card.id} text={card.text} cardId={card.id} index={index}/>) )}
-                <AddElementButton listId={listId} element='card'/>
-                {provided.placeholder}
-            </div>
+        <Draggable draggableId={listId} index={index}>
+            {provided => (
+                <ListContainer {...provided.draggableProps} ref={provided.innerRef} {...provided.dragHandleProps}>
+                    <Droppable droppableId={listId} type='card'>
+                        {(provided) => (
+                            <div>
+                                <h4>{title}</h4>
+                                <div {...provided.droppableProps} ref={provided.innerRef}>
+                                    {cards.map((card, index) => (
+                                        <CardItem 
+                                            key={card.id} 
+                                            text={card.text} 
+                                            cardId={card.id} 
+                                            index={index}
+                                            listId={listId}
+                                        />) )}
+                                    {provided.placeholder}
+                                    <AddElementButton listId={listId} element='card'/>
+                                </div>
+                            </div>
+                        )}
+                    </Droppable>
+                </ListContainer>
             )}
-        </Droppable>
+        </Draggable>
     );
-}
-
-const styles = {
-    container : {
-        backgroundColor: "#dfe3e6",
-        borderRadius: 4,
-        width: 280,
-        height: '100%',
-        padding: 10,
-        marginRight: 8
-    }
 }
 
 export default List;

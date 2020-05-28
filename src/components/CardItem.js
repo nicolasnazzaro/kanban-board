@@ -1,27 +1,27 @@
 import React from 'react';
 import { Card, Typography, CardContent } from '@material-ui/core';
 import { Draggable } from 'react-beautiful-dnd';
+import styled from 'styled-components';
+
+const CardContainer = styled.div `
+  padding-bottom: 4px;
+  padding-top: 4px;
+`;
 
 const CardItem = ({text, cardId, index}) => {
     return (
         <Draggable draggableId={cardId} index={index}>
           {provided => (
-            <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
-              <Card style={styles.cardContainer}>
-                <CardContent>
-                  <Typography gutterBottom>{text}</Typography>
-                </CardContent>
-              </Card>  
-            </div>
+            <CardContainer ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
+                <Card>
+                  <CardContent>
+                    <Typography gutterBottom>{text}</Typography>
+                  </CardContent>
+                </Card>  
+            </CardContainer>
           )}
         </Draggable>
     );
-}
-
-const styles = {
-  cardContainer: {
-    marginBottom: 8
-  }
 }
 
 export default CardItem;
