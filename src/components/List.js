@@ -45,6 +45,15 @@ const List = ({title, cards, listId, index, dispatch}) => {
     const [editing, setEditing] = useState(false);
     const [listTitle, setListTitle] = useState(title);
 
+    const handleDeleteList = () => {
+        dispatch(deleteList(listId));
+    }
+
+    const handleEdit = () => {
+        dispatch(editList(listId, listTitle));
+        setEditing(false);
+    }
+
     const renderEditInput = () => (
     <form style={{display: 'flex', justifyContent: 'space-between', paddingBottom: 8}}>
         <Card style={{width: '55%', padding: '6px 8px 2px'}}>
@@ -79,16 +88,6 @@ const List = ({title, cards, listId, index, dispatch}) => {
             <Icon style={{cursor: 'pointer', marginLeft: 8}} onClick={() => {setEditing(false)}}>close</Icon>
         </div>
       </form>)
-
-    const handleDeleteList = () => {
-        dispatch(deleteList(listId));
-    }
-
-    const handleEdit = (e) => {
-        e.preventDefault();
-        dispatch(editList(listId, listTitle));
-        setEditing(false);
-    }
     
     return (
         <Draggable draggableId={listId} index={index}>

@@ -26,4 +26,4 @@ export const deleteList = (listId) => ({
 export const editList = (listId, listTitle) => ({
     type: 'LIST_EDIT',
     payload: { listId, listTitle }
-})
+});

@@ -35,6 +35,7 @@ const boardReducer = (state = initialState, action) => {
                 title: action.payload,
                 cards: []
             }
+            
             return [...state, newList];
         }
         case 'CARD_ADD': {
@@ -52,6 +53,7 @@ const boardReducer = (state = initialState, action) => {
                     return list;
                 }
             });
+
             return newState;
         }
         case 'LIST_DRAGGED': {
@@ -87,6 +89,7 @@ const boardReducer = (state = initialState, action) => {
                 const card = startList.cards.splice(droppableIndexStart, 1);
                 endList.cards.splice(droppableIndexEnd, 0, ...card);
             }
+
             return newState;
         }
         case 'CARD_DELETE': {
@@ -100,16 +103,23 @@ const boardReducer = (state = initialState, action) => {
                     return list;
                 }
             });
+
             return newState;
+        }
+        case 'CARD_EDIT': {
+            const list = state.find(list => list.id === action.payload.listId);
+            const card = list.cards.find(card => card.id === action.payload.cardId);
+            card.text = action.payload.text;
+            list.cards =[...list.cards];
+
+            return [...state];
         }
         case 'LIST_DELETE': {
             return [...state.filter(list => list.id !== action.payload.listId)];
         }
         case 'LIST_EDIT': {
             const list = state.find(list => list.id === action.payload.listId);
-            console.log(list);
             list.title = action.payload.listTitle
-            console.log(list.title);
   
             return [...state];
         }

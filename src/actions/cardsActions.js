@@ -1,6 +1,9 @@
 export const addCard = (text, listId) => ({
-    type: "ADD_CARD",
-    payload: {text, listId}
+    type: "CARD_ADD",
+    payload: { 
+        text, 
+        listId 
+    }
 });
 
 export const sortCard = (
@@ -24,4 +27,13 @@ export const deleteCard = (listId, cardId) => ({
         listId,
         cardId
     }
-})
+});
+
+export const editCard = (listId, cardId, text) => ({
+    type: 'CARD_EDIT',
+    payload: {
+        listId,
+        cardId,
+        text
+    }
+});
