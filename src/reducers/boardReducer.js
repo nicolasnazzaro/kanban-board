@@ -21,6 +21,11 @@ const initialState = [
         ]
     },
     {
+    title: "Reviewing",
+        id: uuid(),
+        cards: []
+    },
+    {
         title: "Done",
         id: uuid(),
         cards: []

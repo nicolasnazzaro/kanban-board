@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import Icon from '@material-ui/core/Icon';
 import { connect } from 'react-redux';
 import { deleteList, editList } from '../actions/listActions';
-import { Button, TextareaAutosize, Card } from '@material-ui/core';
+import { Button, TextareaAutosize, Card, Typography } from '@material-ui/core';
 
 
 const ListContainer = styled.div`
@@ -15,7 +15,8 @@ const ListContainer = styled.div`
     width: 280px;
     height: 100%;
     padding: 10px;
-    margin-right: 8px
+    margin-right: 8px;
+    box-shadow: 3px 3px 5px -2px black;
 `
 const TitleContainer = styled.div`
     width: 100%;
@@ -98,7 +99,7 @@ const List = ({title, cards, listId, index, dispatch}) => {
                             <div>
                                 {editing ? renderEditInput() : (
                                     <TitleContainer>
-                                        <h4>{title}</h4>
+                                        <Typography variant='h6'>{title}</Typography>
                                         <div>
                                             <ListButton onClick={() => {setEditing(true)}}>edit</ListButton>
                                             <ListButton onClick={handleDeleteList}>delete</ListButton>

@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import Icon from '@material-ui/core/Icon';
+import { Typography } from '@material-ui/core';
 import AddElementForm from './AddElementForm';
 import styled from 'styled-components';
 
 const AddButtonContainer = styled.div`
     display: flex;
-    background-color: #dfe3e6;
+    background-color: inherit;
     align-items: center;
     cursor: pointer;
     border-radius: 3px;
@@ -14,8 +15,7 @@ const AddButtonContainer = styled.div`
     min-width: 266px;
     padding-left: 10px;
     &:hover {
-        border: solid 1px #c0c0c0;
-        background-color: #c0c0c0;
+        background-color: lightgray;
     }
 `;
 
@@ -26,7 +26,10 @@ const AddElementButton = ({element, listId}) => {
     const renderButton = () => (
         <AddButtonContainer onClick={() => {setFormOpen(true)}}>
             <Icon>add</Icon>
-            <p>Add a new {element}</p>
+            { element === 'list'
+                ? <Typography variant='h6'>Add a new {element}</Typography> 
+                : <Typography>Add a new {element}</Typography>
+            }
         </AddButtonContainer>
     );
     
