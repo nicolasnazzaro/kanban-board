@@ -16,7 +16,6 @@ const AddElementForm = ({element, onBlur, dispatch, listId}) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(e.currentTarget.name)
         if (element === 'list') {
             dispatch(addList(elementText));
         } else if (element === 'card') {
